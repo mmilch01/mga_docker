@@ -1,2 +1,2 @@
 # mga_docker
-Multimodal Glioma Analysis pipeline dockerized
+Multimodal Glioma Analysis (MGA) pipeline dockerized
