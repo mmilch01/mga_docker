@@ -2,7 +2,7 @@
 
 echo "REMEMBER, MUST RUN AS LOCAL USER"
 
-pushd nrg-improc
+pushd nrg_improc
         echo git pull
         git pull
 popd
