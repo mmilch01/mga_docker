@@ -7,7 +7,7 @@
   "info-url": "",
   "image": "registry.nrg.wustl.edu/docker/nrg-repo/mga_docker:1.0",
   "type": "docker",
-  "command-line": "\"run_mga_xnat #SESSION_LABEL# --srv $XNAT_HOST --usr $XNAT_USER --pass $XNAT_PASS --proj #PROJECT# --subj #SUBJECT# --upload_data 1 --mga_types T1hi,MPRAGE,T1lo,T2hi,T2lo,T2FLAIR --T1hi ,#T1hi# --MPRAGE ,#MPRAGE# --T1lo ,#T1lo# --T2hi ,#T2hi# --T2FLAIR ,#T2FLAIR# --atlas ,#ATLAS# --json_out #JSON_OUT# --targ_t1 ,#TARG_T1# --use_mask #USE_BRAIN_MASK#\"",
+  "command-line": "\"run_mga_xnat #SESSION_LABEL# --srv $XNAT_HOST --usr $XNAT_USER --pass $XNAT_PASS --proj #PROJECT# --subj #SUBJECT# --upload_data 1 --mga_types T1hi,MPRAGE,T1lo,T2hi,T2lo,T2FLAIR --T1hi ,#T1hi# --MPRAGE ,#MPRAGE# --T1lo ,#T1lo# --T2hi ,#T2hi# --T2FLAIR ,#T2FLAIR# --atlas ,#ATLAS# --json_out #JSON_OUT# --targ_t1 ,#TARG_T1# --upload_dir ,#UPLOAD_DIR# --use_mask #USE_BRAIN_MASK#\"",
   "mounts": [
     {
       "name": "input",
@@ -252,6 +252,23 @@
       "matcher": null,
       "default-value": "1",
       "required": true,
+      "replacement-key": null,
+      "sensitive": null,
+      "command-line-flag": null,
+      "command-line-separator": null,
+      "true-value": null,
+      "false-value": null,
+      "select-values": [],
+      "multiple-delimiter": null
+    },
+    {
+      "name": "UPLOAD_DIR",
+      "label": null,
+      "description": "MGA output resource directory (leave blanc for MGA_mm.dd.yyyy)",
+      "type": "string",
+      "matcher": null,
+      "default-value": null,
+      "required": false,
       "replacement-key": null,
       "sensitive": null,
       "command-line-flag": null,
