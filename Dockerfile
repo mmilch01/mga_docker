@@ -1,4 +1,4 @@
-FROM nrg/nrg-env:latest
+FROM registry.nrg.wustl.edu/docker/nrg-repo/nrg-env:latest
 
 RUN rm -rf /nrgpackages/tools/nrg-improc && \
 	mkdir -p /docker_mount && \
