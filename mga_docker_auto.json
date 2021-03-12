@@ -1,0 +1,151 @@
+{
+  "name": "mga.1.0-scan type classifier",
+  "label": "MGA",
+  "description": "Runs MGA on MR session with automatic detection of scan types",
+  "version": "1.0",
+  "schema-version": "1.0",
+  "info-url": "",
+  "image": "registry.nrg.wustl.edu/docker/nrg-repo/mga_docker:1.0",
+  "type": "docker",
+  "command-line": "run_mga_xnat #SESSION_LABEL# --srv $XNAT_HOST --usr $XNAT_USER --pass $XNAT_PASS --proj #PROJECT# --subj #SUBJECT# --upload_data 1 --mga_types #HOF_TYPES# --atlas ,#ATLAS# --json_out #JSON_OUT# --targ_t1 ,#TARG_T1# --upload_dir ,#UPLOAD_DIR# --use_mask #USE_BRAIN_MASK# --detect_scan_type 1",
+  "override-entrypoint": true,
+  "mounts": [
+    {
+      "name": "input",
+      "writable": false,
+      "path": "/input"
+    },
+    {
+      "name": "output",
+      "writable": true,
+      "path": "/docker_mount"
+    }
+  ],
+  "environment-variables": {},
+  "ports": {},
+  "inputs": [
+    {
+      "name": "SESSION_ID",
+      "description": "XNAT session ID",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "SESSION_LABEL",
+      "description": "XNAT session label",
+      "type": "string"
+    },
+    {
+      "name": "PROJECT",
+      "description": "XNAT project",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "SUBJECT",
+      "description": "XNAT subject",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "HOF_TYPES",
+      "description": "HOF types to include in processing",
+      "type": "string",
+      "required": true,
+      "default-value": "MPRAGE,T1hi,T2FLAIR"
+    },
+    {
+      "name": "ATLAS",
+      "description": "Target atlas (leave blank for auto-detect)",
+      "type": "string"
+    },
+    {
+      "name": "JSON_OUT",
+      "description": "JSON output",
+      "type": "string",
+      "default-value": "1",
+      "required": true
+    },
+    {
+      "name": "TARG_T1",
+      "description": "T1-weighted target scan id (leave blanc for auto-detect)",
+      "type": "string"
+    },
+    {
+      "name": "USE_BRAIN_MASK",
+      "description": "Use brain mask for registration",
+      "type": "string",
+      "default-value": "1",
+      "required": true
+    },
+    {
+      "name": "UPLOAD_DIR",
+      "description": "MGA output resource directory (leave blanc for MGA_mm.dd.yyyy)",
+      "type": "string"
+    }
+  ],
+  "outputs": [],
+  "xnat": [
+    {
+      "name": "mga",
+      "description": "Run MGA 1.0 (autodetect scan types)",
+      "contexts": [
+        "xnat:imageSessionData"
+      ],
+      "external-inputs": [
+        {
+          "name": "session",
+          "description": "Input session",
+          "type": "Session",
+          "required": true,
+          "load-children": true
+        }
+      ],
+      "derived-inputs": [
+        {
+          "name": "session-label",
+          "description": "Session label",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "SESSION_LABEL",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "label"
+        },
+        {
+          "name": "session-id",
+          "description": "Session ID",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "SESSION_ID",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "id"
+        },
+        {
+          "name": "subject-id",
+          "description": "Subject id",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "SUBJECT",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "subject-id"
+        },
+        {
+          "name": "project-id",
+          "description": "Project ID",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "PROJECT",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "project-id"
+        }
+      ],
+      "output-handlers": []
+    }
+  ],
+  "reserve-memory": 4096,
+  "limit-cpu": 2
+}
