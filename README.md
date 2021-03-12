@@ -14,5 +14,7 @@ docker run -u $(id -u ${USER}):$(id -g ${USER}) --rm -v `pwd`:/docker_mount regi
 
 ## Notes
 Option --mga_types must define all MGA types processed by this command.<br>
-Option --<mga_type> <scan_id[,..]> lists all scan ID's for this type from the given session to be processed; e.g. --T1hi 3,21<br>
+
+Option --<mga_type> <scan_id[,..]> lists all scan ID's for this type from the given session to be processed; e.g. --T1hi 3,21<br>. Scan ID's will be auto-determined if --detect_scan_type 1 is specified. 
+
 Use --upload_dir option to supply custom label of MGA resource in XNAT instead of auto-generated one. <br>
