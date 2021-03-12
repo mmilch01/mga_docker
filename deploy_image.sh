@@ -1,10 +1,10 @@
 #!/bin/bash
 
-im=mga_docker
+im=registry.nrg.wustl.edu/docker/nrg-repo/mga_docker
 version=1.0
 
-sudo docker tag nrg/$im:latest registry.nrg.wustl.edu/docker/nrg-repo/$im:$version
+sudo docker tag $im:latest $im:$version
 sudo docker login registry.nrg.wustl.edu
-sudo docker push registry.nrg.wustl.edu/docker/nrg-repo/$im:$version
+sudo docker push $im:$version
 
-echo "deployed registry.nrg.wustl.edu/docker/nrg-repo/$im:$version"
+echo "deployed $im:$version"
